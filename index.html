@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+        
+        <script>
+        $(document).ready(function(){
+            $("section").accordion();
+            
+            $("div").mouseover(function(){
+                $(this).css("background-color", "#ffff00");
+            });
+            
+            $("div").mouseout(function(){
+                $(this).css("background-color", "#ffffff");
+            });
+            
+            $(function(){
+                $("#my_date_picker").datepicker({ 
+                    defaultDate:"06/01/2024" 
+                }); 
+            });
+            
+            $("#pBar").progressbar({
+                value: 0,
+                max:20,
+                complete: function() {
+                    $(this).progressbar("value", 0);
+                }
+            });
+            
+            function progress() {
+                var val = $("#pBar").progressbar("value") || 0;
+                $("#pBar").progressbar("value", val+1);
+                if (val < 19) {
+                    setTimeout(progress, 1000);
+                }
+            }
+            
+            $("#fd1").click(function(){
+                $("#d1").fadeOut(20000);
+                progress();
+            });
+            
+            $("#fd2").click(function(){
+                $("#d2").fadeOut(20000);
+                progress();
+            });
+            
+            $("#fd3").click(function(){
+                $("#d3").fadeOut(20000);
+                progress();
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+        <div id="navbar">
+            <a href="/">Back to homepage</a>
+		</div>
+		<!-- Dummy object to hold the navbar-->
+		<div id="spacer">
+		</div>
+		
+        <h1>Welcome!</h1>
+        
+        <nav id="pBar" style="margin-bottom: 5%;">
+        </nav>
+        
+        <nav style="margin-bottom: 5%;">
+            <button id="fd1">Fade Div 1</button>
+            <button id="fd2">Fade Div 2</button>
+            <button id="fd3">Fade Div 3</button>
+        </nav>
+        
+        <section>
+            <h3>Divs</h3>
+            <nav>
+                <div id="d1" style="border: 1px solid black;">
+                    <p>A paragraph in a div.</p>
+                    <p>Another paragraph in a div.</p>
+                </div>
+                <div id="d2" style="border: 1px solid black;">
+                    <p>A paragraph in another div.</p>
+                    <p>Another paragraph in another div.</p>
+                </div>
+                <div id="d3" style="border: 1px solid black;">
+                    <p>A paragraph in another div.</p>
+                    <p>Another paragraph in another div.</p>
+                </div>
+            </nav>
+            
+            <h3>Datepicker</h3>
+            <nav>
+                <p>Date: 
+                    <input type="text" id="my_date_picker">
+                </p>
+            </nav>
+            
+        </section>
+    </body>
+</html>
